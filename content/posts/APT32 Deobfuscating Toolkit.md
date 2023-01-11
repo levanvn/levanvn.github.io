@@ -1,0 +1,277 @@
+---
+author: levanvn
+title: "APT32 Deobfuscating Toolkit"
+date: 2020-10-01
+description: "APT32 Deobfuscating Toolkit"
+categories:
+  - unpacking
+  - deobfuscating
+  - malware analysis
+tags:
+  - apt32
+  - malware
+  - unpacking
+  - deobfuscating
+  - reverse engineering
+---
+
+[The original post](http://web.archive.org/web/20211019013324/https://blog.viettelcybersecurity.com/apt32-deobfuscation-arsenal-deobfuscating-mot-vai-loai-obfucation-toolkit-cua-apt32-phan-1/) 
+
+APT32 (Ocean Lotus) là nhóm APT nổi tiếng với mục tiêu tấn công vào các tổ chức trong và ngoài nước ta. Đây là nhóm APT được ghi nhận là đã tấn công vào nhiều công ty, tổ chức tư nhân trải dài với nhiều lĩnh vực công nghiệp khác nhau. Chuỗi tấn công của nhóm APT32 có nhiều giai đoạn, với các lớp bảo vệ lẫn nhau, khiến cho mã độc của APT32 có nét đặc sắc riêng và gây nhiều khó khăn cho việc đọc hiểu code.
+
+Kho công cụ của APT32 phong phú và đa dạng, từ các phần mềm thương mại như Cobalt Strike, phầm mềm mã nguồn mở như Mimikatz, hay các mã độc đặc trưng của APT32 như Denis, KerrDown và các loại mã độc chưa được đặt tên khác...
+
+Dù cho sử dụng các công cụ sẵn có, hay các loại mã độc được thiết kế riêng, một đặc điểm chung là các mã độc này đều được làm rối (obfuscated) và được đóng gói qua nhiều lớp (packed) trước khi phát tán đến nạn nhân
+
+Ở đây ta thấy sự khác nhau giữa packer và obfuscator. Packer đóng gói file thực thi ban đầu qua một hoặc nhiều lớp, các lớp này có thể dưới dạng shellcode hoặc là một file thực thi khác. Quá trình unpack để lấy được file thực thi ban đầu thường được thực hiện thông qua trình Debugger như Ollydbg hay x64dbg. Ngược lại trình Obfuscator biến đổi file ban đầu về dạng khó đọc hơn bằng cách chèn thêm các kỹ thuật anti-Disassembly. Obfuscator thường nhắm đến các trình Disassembler như IDA, Ghidra.
+
+
+Nhóm nghiên cứu Viettel Threat Intelligence (VTI) chúng tôi đã quan sát thấy có ít nhất 2 loại obfuscator đặc trưng được sử dụng bởi APT32. Hai loại được sử dụng cho mỗi loại mã độc riêng và sử dụng cơ chế obfuscation khác nhau cho mỗi loại.
+
+Trong bài viết này sẽ trình bày về cơ chế obfuscation của từng loại và sử dụng các công cụ Capstone, Keystone, và IDAPython để deobfuscate mã độc về dạng có thể dễ dàng đọc bằng các công cụ như IDA hoặc Hex-ray Decompiler.
+
+Trước khi đi vào từng loại obfuscate, ta so sánh các đặc điểm của 2 loại này. (Chúng tôi tạm gọi là Type 1 và Type 2 cho mỗi loại).
+
+![image](/images/APT32/Screen-Shot-2020-09-02-at-20.18.04.png)
+
+## 1. Type 1 Deobfuscator
+
+Type 1 obfuscator được sử dụng cho mã độc như Denis malware. Một ví dụ về loại mã độc này được nhắc đến trong báo cáo của  [ESET](https://www.welivesecurity.com/wp-content/uploads/2018/03/ESET_OceanLotus.pdf)  năm 2018 hoặc trong bài viết của  [Fireeye](https://www.fireeye.com/blog/threat-research/2020/04/apt32-targeting-chinese-government-in-covid-19-related-espionage.html)  về chiến dịch tấn công của APT32 vào Vũ Hán năm 2020 với tên krpt.dll (MD5: d739f10933c11bd6bd9677f91893986c - Metajack). Hoặc mẫu mã độc mà chúng tôi ghi nhận gần đây vào dịp hội nghị ASEAN lần thứ 36 ngày 26-6-2020 ( Filename: 36 ASEAN Summit 26-06-2020 Conference.doc.exe, MD5: 7579aede6a223c96231ad30472a060db)
+
+![image](/images/APT32/Picture1.png)
+
+_Hình 1: Type 1-obfuscator_
+
+Ở Type 1, mỗi basic block là một đơn vị để thực hiện obfuscate
+
+**Junk code**
+
+![image](/images/APT32/Picture2.png)
+
+_Hình 2: Junk code_
+
+Đoạn junk code được chèn thêm vào mỗi basic block. Đoạn junk code này không thay đổi trạng thái thanh ghi và ngăn xếp của chương trình. Để làm điều đó, ta thấy rằng các thanh ghi được cất vào ngăn xếp bằng lệnh push và trả về các thanh ghi bằng lệnh pop khi kết thúc đoạn junk code. Chỉ có các thanh ghi eax, ebx, ecx, edx và thanh ghi cờ được sử dụng trong junk code.
+
+**Các vị trí chèn junk code**
+
+**a. Push r32 / Pop r32**
+
+![image](/images/APT32/Picture3.png)
+
+_Hình 3: Push eax_
+
+![image](/images/APT32/Picture5.png)
+
+_Hình 4: Pop esi_
+
+Ta thấy cách junk code được chèn thêm như sau:
+
+![image](/images/APT32/Screen-Shot-2020-09-02-at-20.06.56.png)
+
+**b. Thêm toàn bộ basic block là junk code**
+
+![image](/images/APT32/Picture6.png)
+
+_Hình 5: Trường hợp cả basic block là junk code_
+
+Ta thấy trong trường hợp này toàn bộ basic block là junk code. Các cặp lệnh rẽ nhánh JO/JNO, JZ/JNZ, JB/JNB, … đều nhảy về một địa chỉ
+
+**c. Biến đổi lệnh call**
+
+Mục đích của sự biến đổi này là làm rối luồng thực thi của chương trình. IDA sẽ không nhận ra lời gọi hàm và lệnh tiếp theo được thực thi. Ta thấy có hai cách biến đổi lệnh call như sau:
+
+**_Cách 1_**_:_
+
+![image](/images/APT32/Screen-Shot-2020-09-02-at-20.08.01.png)
+
+![image](/images/APT32/Picture7.png)
+
+_Hình 6: Control-Flow Obfuscation_
+
+**_Cách 2:_**
+
+![image](/images/APT32/Screen-Shot-2020-09-02-at-20.06.56-1.png)
+
+![image](/images/APT32/Picture8.png)
+
+_Hình 7: Control-Flow Obfuscation_
+
+**Một vài biến thể khác**
+
+Ở một số mẫu khác xuất hiện gần đây, chúng tôi thấy một vài cải tiến của APT32 ở Type 1
+
+![image](/images/APT32/Picture9.png)
+
+_Hình 8: Push esi obfuscation_
+
+Lệnh Push được làm rối bằng một đoạn junk code có chức năng tương đương
+
+![image](/images/APT32/Picture10.png)
+
+_Hình 9: Mov eax, 09 obfuscation_
+
+Lệnh mov reg, imm được thực hiện gián tiếp qua các phép or, xor, …
+
+**Deobfuscating**
+
+Ở trên ta đã thấy cách APT32 chèn các junk code vào từng basic block. Ta cần xóa đi các junk code này và điều chỉnh các lệnh assembly về dạng ban đầu. Để làm điều này, chúng tôi sử dụng các công cụ Capstone – Disassembler Framework, Keystone-Assembler Framework, kết hợp với các API của IDA Python. Đơn vị để giải mã cũng là basic block. Ta sẽ tận dụng các API của IDA để duyệt qua các basic block, với mỗi basic block, bằng Capstone ta sẽ tìm các đoạn junk code phù hợp với các tiêu chí trên. Cụ thể ta cần tìm các đoạn push/pop r32, các cặp lệnh rẽ nhánh cùng nhảy về một địa chỉ, các biến thể của lệnh call được sử dụng cho mục đích control-flow obfuscation. Khi tìm được đoạn code phù hợp, ta sẽ sử dụng Keystone để chuyển các lệnh về dạng ban đầu. Ta thấy các đoạn junk code có đặc điểm là không thay đổi trạng thái thanh ghi và trạng thái ngăn xếp của chương trình, nghĩa là giá trị thanh ghi esp trước và sau khi thực thi junk code sẽ không thay đổi. Nhờ vào đặc điểm này ta có thể sử dụng hàm  **get_spd**(ea) trong IDA như là một cách để nhận diện các đoạn junk code.
+
+Ta có kết quả trước và sau khi deobfuscate:
+
+![image](/images/APT32/Picture11.png)
+
+_Hình 10 So sánh kết quả trước và sau Deobfuscating_
+
+Chúng ta có thể tham khảo phần code và sample tại:  [Github](https://github.com/levanvn/APT32_Deobfuscate)
+
+## 2. Type 2 Deobfuscation
+
+Kiểu obfuscation thứ 2 của APT được sử dụng để obfuscate Cobalt Strike beacon và một số mẫu mã độc xuất hiện gần đây. Một ví dụ mà chúng tôi ghi nhận gần đây:
+
+![image](/images/APT32/Untitled.png)
+
+Luồng hoạt động của một mẫu mã độc như sau:
+
+![image](/images/APT32/1.png)
+
+Hình 1: Luồng thực thi ở một mẫu mã độc type 2
+
+Cơ chế obfuscation của loại này dựa trên 2 phần chính là làm rối luồng thực thi của chương trình (anti-disassembly), mã hóa các data (strings, encrypted data,…) và chỉ giải mã khi được dùng đến
+
+Như đã nhắc đến ở phần 1, đơn vị để thực hiện obfuscation ở type 2 là theo từng function. Với mỗi function ban đầu, APT32 chèn thêm các junk code để làm rối luồng hoạt động của hàm. Kết quả sau khi obfuscation là IDA không thể nhận ra các Regular function:
+
+![image](/images/APT32/2.png)
+
+Hình 2: Kết quả obfuscation ở Type 2
+
+**Data Encryption**
+
+Tất cả dữ liệu ở .data, .rdata section (trừ import function name trong import directory) đều được mã hóa và chỉ được giải mã khi được sử dụng. Nếu chúng ta sử dụng công cụ như strings utility thì chỉ thu được các chuỗi strings không mang ý nghĩa. Hàm giải mã được chèn vào đầu đoạn prologue function trước khi chức năng chính của function được thực thi.
+
+![image](/images/APT32/3.png)
+
+Hình 3: Vị trí chèn Decrypt function
+
+![image](/images/APT32/4.png)
+
+Hình 4: Hàm giải mã được sử dụng trong Type 2
+
+Một câu hỏi được đặt ra là APT32 đã xác định vị trí dữ liệu để mã hóa như thế nào và cách thức để giải mã dữ liệu trở lại. Câu trả lời là APT32 đã sử dụng bảng relocations để tìm các vị trí thích hợp. Trong định dạng file PE, bảng relocations được dùng để chỉ ra các vị trí cần phải thay đổi khi image base thay đổi so với giá trị nằm trên file PE. Các vị trí này thường lưu giữ các giá trị được quy chiếu theo Virtual Address (VA) như vtable, địa chỉ của các hàm, biến toàn cục, strings,... Ví dụ image base là 0x10000000 và chuỗi “Hello World” được lưu tại địa chỉ 0x10002030 thì lệnh push “Hello World” có opcode 68-30200010 tại địa chỉ 0x10001234 sẽ phải reloc thành 68-30200020 khi image base thay đổi thành 0x20000000. Như vậy trong bảng relocation phải lưu vị trí có RVA 0x1235 để lệnh push có thể trỏ đúng đến vị trí của chuỗi “Hello World”. Đây là cơ sở để xác định vị trí vùng dữ liệu có thể mã hóa.
+
+Để giải mã dữ liệu trở lại trước khi một function thực thi, một mảng các struct được sử dụng để lưu các thông tin cần thiết cho việc giải mã. Struct có dạng:
+
+![image](/images/APT32/5.png)
+
+Hình 5: Struct lưu thông tin giải mã trong phiên bản mã hóa của Cobalt Strike Beacon
+
+Giá trị address cho biết địa chỉ của vùng dữ liệu bị mã hóa, size cho biết kích thước của vùng dữ liệu, XOR_key là khóa được sử dụng trong phép XOR. Ở một biến thể khác, struct có cấu trúc như sau:
+
+![image](/images/APT32/6.png)
+
+Hình 6: Struct trong một biến thể mã độc khác
+
+Ở hình 4 và 3 ta thấy hàm giải mã và đối số truyền vào. Đối số truyền vào lưu giữ các thông tin như số lượng vị trí relocation trong một hàm và offset của mỗi vị trí trong struct array. Hàm giải mã sẽ dựa vào đối số truyền vào để xác định được các struct tương ứng trong struct array và thực hiện giải mã.
+
+Ở chiều ngược lại, để giải mã dữ liệu ta chỉ cần xác định địa chỉ cơ sở của struct array và các trường giá trị bên trong (khác nhau ở Cobalt Strike và một số mẫu khác). Script IDAPython để giải mã như sau:
+
+![image](/images/APT32/7.png)
+
+Hình 7: IDAPython Script để giải mã dữ liệu bị mã hóa
+
+**Control-Flow Obfuscation**
+
+![image](/images/APT32/8.png)
+
+Hình 8: Control- Flow Obfuscation in Type 2
+
+Không giống như ở Type 1, junk code được chèn vào theo basic block. Ở Type 2 junk code được chèn vào vị trí bất kỳ trong function. Junk code được tạo bằng cách:
+
+-   Chèn các giá trị hằng số vào .data section của PE file. Các giá trị này được sử dụng trong phép so sánh cho lệnh nhảy có điều kiện.
+-   Các lệnh test, cmp được dùng để so sánh các biến ở trên với một hằng số, sao cho lệnh nhảy có điều kiện (JZ, JNZ, JO, JNO, JS, JNS,… ) luôn luôn xảy ra.
+-   Do IDA ưu tiên disassembly vị trí theo sau lệnh nhảy có điều kiện hơn là vị trí đích của lệnh nhảy nên dẫn đến sai lệnh trong việc xác định vị trí để thực hiện disassembly.
+
+Để deobfuscate dạng này ta chỉ cần patch lại lệnh nhảy có điều kiện thành lệnh JMP. Vấn đề đặt ra làm sao xác định được các vị trí chèn junk code? Lấy lại ý tưởng từ APT32, ta thấy các biến toàn cục được sử dụng trong phép so sánh ở trên đều phải được thêm vào bảng relocation để mà chương trình có thể hoạt động đúng khi load file vào bộ nhớ. Ta chỉ cần duyệt bảng relocation, kiểm tra các vị trí thỏa mãn với junk code ở trên và thực hiện patch ở những nơi thỏa mãn. Ở Python Script, với mỗi vị trí relocation, ta sử dụng Capstone để disassembly và kiểm tra điều kiện ở mỗi instruction, ta lại dùng Keystone để chuyển lệnh jmp tại địa chỉ tìm được ra lệnh assembly. Kết quả sau khi deobfuscate:
+
+![image](/images/APT32/9.png)
+
+Hình 9: Kết quả trước và sau Deobfuscating
+
+Chúng ta có thể tham khảo phần code và sample tại:  [Github](https://github.com/levanvn/APT32_Deobfuscate)
+
+Các loại mã độc nêu trên đều đã được Hệ thống  [Viettel Threat Intelligence](http://viettelthreatintelligence.com/)  (VTI) phân tích chi tiết. Phần sau đây chúng tôi mô tả thêm về bối cảnh của các mẫu và cung cấp dấu hiệu nhân biết, hạ tầng mã độc (IOCs) để các tổ chức có thể phản ứng với nguy cơ.
+
+**Thông tin về chiến dịch tấn công của mẫu Type 1 – Metajack:**
+
+-   Nhóm tấn công: APT32 (Hay còn gọi là Ocean Lotus, APT-C-00…)
+-   Đối tượng bị tấn công: người dùng tại Trung Quốc.
+-   Thời gian diễn ra chiến dịch: Từ cuối Quý IV/2019 cho tới hết Quý I/2020 (dựa trên report được ghi nhận tại Trung Quốc).
+-   Hình thức tấn công: gửi tập tin nén có chứa mã độc qua Email.
+
+![image](/images/APT32/1-1.png)
+
+Hình: Bên cạnh mẫu Email có trong report của FireEye, Hệ thống VTI cũng ghi nhận một mẫu Email tương tư được sử dụng trong chiến dịch nhắm vào người dùng Trung Quốc với nội dung về COVID-19.
+
+![image](/images/APT32/2-1.png)
+
+Nội dung tập tin lừa người dùng click vào với tên gọi liên quan tới chủ đề Covid-19.
+
+Hash IOC trong chiến dịch Covid-19 được sử dụng bởi nhóm APT-32:
+
+-   d739f10933c11bd6bd9677f91893986c
+-   33f51d4ed03b763c88b6c3f254b2fdbd337b2701
+-   36be872b74680305cb612ba11a0a10adf4670de3deea4fb4faabdc971043c826
+-   8acdc3de7aee7d7d7242d42e7e5254be
+-   d0be878a474170584ba3cfdfd19b22baa81f19df
+-   53acfefcda2e6e3f31786a2e2c7fa5bcb83380e284d919f03bfc6d31a6b3b76f
+-   9f7d3c2f76e7e302d9e34959f73d5085
+-   da05bde66324721928be613982654f203691fb86
+-   9d4bcfaf7ebbb152516b327b3895f521341c4c9373a3917485cc49ed5e085fb2
+-   8db0def710f78befc040f68575001947
+-   04beefed719462ea87d5c1b6f04df6a27a757f64
+-   91f8358fad427d268caea1594b2bbe2bb3cd910f240fbac7cfc5c684ba9f5e63
+
+C&C IOC được sử dụng bởi nhóm APT-32:
+
+-   libjs.inquirerjs[.]com
+-   vitlescaux[.]com
+-   m.topiccore[.]com
+-   jcdn.jsoid[.]com
+-   tripplekill.mentosfontcmb[.]com
+
+**Thông tin về chiến dịch tấn công của mẫu Type 2 – Cobalt Strike:**
+
+-   Nhóm tấn công: APT32 (Hay còn gọi là Ocean Lotus, APT-C-00…).
+-   Đối tượng bị tấn công: người dùng tại Việt Nam.
+-   Thời gian diễn ra chiến dịch: từ cuối tháng 7/2020 tới nay.
+-   Số lượng nạn nhân được hệ thống VTI ghi nhận trong chiến dịch:  **hơn 900 nạn nhân tính riêng tại Việt Nam**.
+-   Hình thức tấn công: Văn bản định dạng MIME chứa macro VBA độc gửi qua email với nội dung về hợp đồng hợp tác.
+
+![image](/images/APT32/3-1.png)
+
+Hình: VBA Macro độc được extract từ mẫu **“GFB_Service-Agreement_MDB_AF-Jun2020_P HOP DONG TRA SAU.doc”**
+
+Hash IOC trong chiến dịch nhắm vào người dùng Việt Nam được sử dụng bởi nhóm APT-32 (Cảm ơn bạn YCY @batrix20 đã chia sẻ một số mẫu):
+
+-   cc2027319a878ee18550e35d9b522706 – mẫu văn bản  **“GFB_Service-Agreement_MDB_AF-Jun2020_P HOP DONG TRA SAU.doc”**
+-   69fabcccad86a270b0c0733c3defba767e5f938d
+-   86cebd189cfdcfb6e76cba7a258d7f90a3ec353348611378c48fa28740bebd98
+-   e2511f009b1ef8843e527f765fd875a7
+-   ed0d204ed5613306f27919d36425c35b04223a40
+-   7709b376ea5b388e1b415a93fc618c1febddfbd977254cc63e3e8d2daa5fb3c9
+-   94c46d94d802ed3242ffed32187c5e9a
+-   ebce93189870257813e110d19982006f07619720
+-   2f7e9293ba707503f907d630ac1fda3c09a8b06d50976dafabe16678c453fc2c
+
+C&C IOC trong chiến dịch nhắm vào người dùng Việt Nam được sử dụng bởi nhóm APT-32:
+
+-   accounts.getmyip[.]com
+-   feeder.blogdns[.]com
+-   beautifull-font.salebusinesend[.]com
+-   summerevent.webhop[.]net
+-   word.dictionarieswindow[.]com
+-   node.podzone[.]org
+-   ru.lobbyidea[.]com
+-   account.dvrdns[.]org
+-   content.servequake[.]com
+-   letsme.gotdns[.]com
+

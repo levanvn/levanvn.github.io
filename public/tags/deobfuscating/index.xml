@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>deobfuscating on Welcome to my blog</title>
+    <link>https://levanvn.github.io/tags/deobfuscating/</link>
+    <description>Recent content in deobfuscating on Welcome to my blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://levanvn.github.io/tags/deobfuscating/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>APT32 Deobfuscating Toolkit</title>
+      <link>https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/</guid>
+      <description>The original post
+APT32 (Ocean Lotus) là nhóm APT nổi tiếng với mục tiêu tấn công vào các tổ chức trong và ngoài nước ta. Đây là nhóm APT được ghi nhận là đã tấn công vào nhiều công ty, tổ chức tư nhân trải dài với nhiều lĩnh vực công nghiệp khác nhau. Chuỗi tấn công của nhóm APT32 có nhiều giai đoạn, với các lớp bảo vệ lẫn nhau, khiến cho mã độc của APT32 có nét đặc sắc riêng và gây nhiều khó khăn cho việc đọc hiểu code.</description>
+    </item>
+    
+  </channel>
+</rss>

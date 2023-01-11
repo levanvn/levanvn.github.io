@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pyarmor on Welcome to my blog</title>
+    <link>https://levanvn.github.io/tags/pyarmor/</link>
+    <description>Recent content in pyarmor on Welcome to my blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://levanvn.github.io/tags/pyarmor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FLARE-ON 9- Challenge 11: Unpacking Pyarmor</title>
+      <link>https://levanvn.github.io/posts/unpacking-pyarmor/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/unpacking-pyarmor/</guid>
+      <description>The original post
+FLARE-ON is an annual CTF event organized by Mandiant that focuses on malware and reverse engineering. Participating in challenges is an opportunity to help us access new ideas, and new techniques of malware, based on the experience of Mandiant experts.
+In this year&amp;rsquo;s challenges, challenge 8 and challenge 11 are all related to packing and obfuscating software. Challenge 8 is the most elaborately designed, and is considered the most difficult of the 11 challenges.</description>
+    </item>
+    
+  </channel>
+</rss>

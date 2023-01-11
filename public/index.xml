@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcome to my blog</title>
+    <link>https://levanvn.github.io/</link>
+    <description>Recent content on Welcome to my blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://levanvn.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FLARE-ON 9- Challenge 11: Unpacking Pyarmor</title>
+      <link>https://levanvn.github.io/posts/unpacking-pyarmor/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/unpacking-pyarmor/</guid>
+      <description>The original post
+FLARE-ON is an annual CTF event organized by Mandiant that focuses on malware and reverse engineering. Participating in challenges is an opportunity to help us access new ideas, and new techniques of malware, based on the experience of Mandiant experts.
+In this year&amp;rsquo;s challenges, challenge 8 and challenge 11 are all related to packing and obfuscating software. Challenge 8 is the most elaborately designed, and is considered the most difficult of the 11 challenges.</description>
+    </item>
+    
+    <item>
+      <title>APT32 Deobfuscating Toolkit</title>
+      <link>https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/</guid>
+      <description>The original post
+APT32 (Ocean Lotus) là nhóm APT nổi tiếng với mục tiêu tấn công vào các tổ chức trong và ngoài nước ta. Đây là nhóm APT được ghi nhận là đã tấn công vào nhiều công ty, tổ chức tư nhân trải dài với nhiều lĩnh vực công nghiệp khác nhau. Chuỗi tấn công của nhóm APT32 có nhiều giai đoạn, với các lớp bảo vệ lẫn nhau, khiến cho mã độc của APT32 có nét đặc sắc riêng và gây nhiều khó khăn cho việc đọc hiểu code.</description>
+    </item>
+    
+    <item>
+      <title>APT Goblin Panda Malware Analysis</title>
+      <link>https://levanvn.github.io/posts/apt-goblin-panda-malware-analysis/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/apt-goblin-panda-malware-analysis/</guid>
+      <description>The original post
+Trong khoảng thời gian từ giữa năm 2019 cho đến tháng 4/2020, theo nhận định của nhóm Viettel Threat Intelligence (VTI), nhóm APT có tên &amp;ldquo;Goblin Panda&amp;rdquo; (được biết với các tên gọi Hellsing, 1937CN…) thường lợi dụng các chủ đề nhạy cảm về để làm đòn bẩy thâm nhập sâu hơn vào hệ thống các tổ chức tại.
+Trong chiến dịch gần nhất lợi dụng tình hình dịch bệnh Covid-19, mẫu mới của nhóm APT này có khả năng bypass trên 95% các giải pháp Anti-virus (tại thời điểm ghi nhận phát hiện), Viettel Threat Intelligence đánh giá Goblin Panda là yếu tố nguy hiểm cần tiếp tục theo dõi trong tương lai lâu dài.</description>
+    </item>
+    
+    <item>
+      <title>Unpack Themida Malware</title>
+      <link>https://levanvn.github.io/posts/unpack-themida-malware/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/unpack-themida-malware/</guid>
+      <description>The original post
+Gần đây, Nhóm Viettel Threat Intelligence có nhận được một mẫu malware có nguồn gốc Trung Quốc. Theo quan sát của chúng tôi thì nhóm tin tặc này đã tấn công vào các cơ quan tổ chức ở Việt Nam ít nhất là từ năm 2013.
+Mẫu thu được là một file được pack bằng Themida. Các file thực thi thường bị pack nhằm lẩn tránh các trình quét virus, hoặc nhằm cản trở việc phân tích của con người, việc unpack nhằm chống lại quá trình này.</description>
+    </item>
+    
+    <item>
+      <title>Writing a simple PE Packer in detail</title>
+      <link>https://levanvn.github.io/posts/writing-a-simple-pe-packer-in-detail/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/writing-a-simple-pe-packer-in-detail/</guid>
+      <description>Packers là một trong những kỹ thuật anti-RE rất phổ biến được sử dụng. Packer có nhiều lợi ích như làm rối mã nguồn tạo ra độ khó và kỹ năng cho người phân tích, giảm thiểu kích thước file thực thi lưu trữ trên bộ nhớ và có thể ẩn mình trước những phần mềm antivirus. Bài viết sẽ trình bày về nguyên lý mà các chương trình packer vẫn thường sử dụng và đi sâu vào những chi tiết kỹ thuật để hoàn thành được một chương trình Packer đầy đủ.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://levanvn.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/about/</guid>
+      <description>This blog is to archive some of my posts.</description>
+    </item>
+    
+  </channel>
+</rss>
