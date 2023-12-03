@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta name="generator" content="Hugo 0.107.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content=""
+  />
+  
+    
+      <title>Welcome to my blog</title>
+    
+  
+  <link rel="stylesheet" href="/css/reset.css"/>
+  <link rel="stylesheet" href="/css/font.css"/>
+  <link rel="stylesheet" href="/css/smigle.css"/>
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  <body>
+    <header>
+  <div id="brand">
+     
+    <div class="text">
+      <a href="https://levanvn.github.io/"><h1>Welcome to my blog</h1></a>
+      <h3>some posts about malware and reverse engineering</h3>
+    </div>
+  </div>
+  <nav>
+    
+      
+        
+        <a href="/"><b>Home</b></a>
+      
+         | 
+        <a href="/about/"><b>About</b></a>
+      
+         | 
+        <a href="/posts/"><b>Posts</b></a>
+      
+         | 
+        <a href="/categories/"><b>Categories</b></a>
+      
+         | 
+        <a href="/tags/"><b>Tags</b></a>
+      
+    
+  </nav>
+  <hr />
+</header>
+
+    <div id="content">
+      
+	<main>
+		
+		
+			<article>
+  <h1 class="summary-title"><a href="https://levanvn.github.io/posts/flare-on10-challenge13/">FLARE-ON 10 - Challenge 13</a></h1>
+  <div class="post-meta">
+  <strong>
+    <span>Posted on</span>
+    <time>2023-12-03</time>
+    <span>in</span>
+    
+      <a href="/categories/unpacking">unpacking</a>, 
+      <a href="/categories/deobfuscating">deobfuscating</a>, 
+      <a href="/categories/malware-analysis">malware analysis</a>
+  </strong>
+  <span> • 866 words</span>
+  <span> • 5 minute read</span>
+  
+    <div>
+      <span>Tags:</span>
+      
+        <a href="/tags/malware">malware</a>, 
+        <a href="/tags/unpacking">unpacking</a>, 
+        <a href="/tags/deobfuscating">deobfuscating</a>, 
+        <a href="/tags/reverse-engineering">reverse engineering</a>
+    </div>
+  
+</div>
+
+  <div class="summary-body">
+    <p>The original post
+This challenge is a bind shell that opens port 1337. If we use netcat to connect to this port and wireshark to capture packets, we see that it receives windows commands from the client side and returns results. These data are all in unencrypted cleartext form.
+This is an obfuscated file so opening it in IDA will not properly parse the functions of this bind shell. To know all the functions of the bind shell, we first need to write a script to convert the obfuscated file into a form that IDA can read.</p>
+    
+      <a href="https://levanvn.github.io/posts/flare-on10-challenge13/">Read more...</a>
+    
+  </div>
+</article>
+
+		
+			<article>
+  <h1 class="summary-title"><a href="https://levanvn.github.io/posts/unpacking-pyarmor/">FLARE-ON 9- Challenge 11: Unpacking Pyarmor</a></h1>
+  <div class="post-meta">
+  <strong>
+    <span>Posted on</span>
+    <time>2022-11-13</time>
+    <span>in</span>
+    
+      <a href="/categories/unpacking">unpacking</a>
+  </strong>
+  <span> • 1834 words</span>
+  <span> • 9 minute read</span>
+  
+    <div>
+      <span>Tags:</span>
+      
+        <a href="/tags/pyarmor">pyarmor</a>, 
+        <a href="/tags/unpacking">unpacking</a>, 
+        <a href="/tags/reverse-engineering">reverse engineering</a>
+    </div>
+  
+</div>
+
+  <div class="summary-body">
+    <p>The original post
+FLARE-ON is an annual CTF event organized by Mandiant that focuses on malware and reverse engineering. Participating in challenges is an opportunity to help us access new ideas, and new techniques of malware, based on the experience of Mandiant experts.
+In this year&rsquo;s challenges, challenge 8 and challenge 11 are all related to packing and obfuscating software. Challenge 8 is the most elaborately designed, and is considered the most difficult of the 11 challenges.</p>
+    
+      <a href="https://levanvn.github.io/posts/unpacking-pyarmor/">Read more...</a>
+    
+  </div>
+</article>
+
+		
+			<article>
+  <h1 class="summary-title"><a href="https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/">APT32 Deobfuscating Toolkit</a></h1>
+  <div class="post-meta">
+  <strong>
+    <span>Posted on</span>
+    <time>2020-10-01</time>
+    <span>in</span>
+    
+      <a href="/categories/unpacking">unpacking</a>, 
+      <a href="/categories/deobfuscating">deobfuscating</a>, 
+      <a href="/categories/malware-analysis">malware analysis</a>
+  </strong>
+  <span> • 2428 words</span>
+  <span> • 12 minute read</span>
+  
+    <div>
+      <span>Tags:</span>
+      
+        <a href="/tags/apt32">apt32</a>, 
+        <a href="/tags/malware">malware</a>, 
+        <a href="/tags/unpacking">unpacking</a>, 
+        <a href="/tags/deobfuscating">deobfuscating</a>, 
+        <a href="/tags/reverse-engineering">reverse engineering</a>
+    </div>
+  
+</div>
+
+  <div class="summary-body">
+    <p>The original post
+APT32 (Ocean Lotus) là nhóm APT nổi tiếng với mục tiêu tấn công vào các tổ chức trong và ngoài nước ta. Đây là nhóm APT được ghi nhận là đã tấn công vào nhiều công ty, tổ chức tư nhân trải dài với nhiều lĩnh vực công nghiệp khác nhau. Chuỗi tấn công của nhóm APT32 có nhiều giai đoạn, với các lớp bảo vệ lẫn nhau, khiến cho mã độc của APT32 có nét đặc sắc riêng và gây nhiều khó khăn cho việc đọc hiểu code.</p>
+    
+      <a href="https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/">Read more...</a>
+    
+  </div>
+</article>
+
+		
+			<article>
+  <h1 class="summary-title"><a href="https://levanvn.github.io/posts/apt-goblin-panda-malware-analysis/">APT Goblin Panda Malware Analysis</a></h1>
+  <div class="post-meta">
+  <strong>
+    <span>Posted on</span>
+    <time>2020-05-01</time>
+    <span>in</span>
+    
+      <a href="/categories/malware-analysis">malware analysis</a>
+  </strong>
+  <span> • 2208 words</span>
+  <span> • 11 minute read</span>
+  
+    <div>
+      <span>Tags:</span>
+      
+        <a href="/tags/apt">apt</a>, 
+        <a href="/tags/malware">malware</a>, 
+        <a href="/tags/reverse-engineering">reverse engineering</a>
+    </div>
+  
+</div>
+
+  <div class="summary-body">
+    <p>The original post
+Trong khoảng thời gian từ giữa năm 2019 cho đến tháng 4/2020, theo nhận định của nhóm Viettel Threat Intelligence (VTI), nhóm APT có tên &ldquo;Goblin Panda&rdquo; (được biết với các tên gọi Hellsing, 1937CN…) thường lợi dụng các chủ đề nhạy cảm về để làm đòn bẩy thâm nhập sâu hơn vào hệ thống các tổ chức tại.
+Trong chiến dịch gần nhất lợi dụng tình hình dịch bệnh Covid-19, mẫu mới của nhóm APT này có khả năng bypass trên 95% các giải pháp Anti-virus (tại thời điểm ghi nhận phát hiện), Viettel Threat Intelligence đánh giá Goblin Panda là yếu tố nguy hiểm cần tiếp tục theo dõi trong tương lai lâu dài.</p>
+    
+      <a href="https://levanvn.github.io/posts/apt-goblin-panda-malware-analysis/">Read more...</a>
+    
+  </div>
+</article>
+
+		
+			<article>
+  <h1 class="summary-title"><a href="https://levanvn.github.io/posts/unpack-themida-malware/">Unpack Themida Malware</a></h1>
+  <div class="post-meta">
+  <strong>
+    <span>Posted on</span>
+    <time>2020-01-02</time>
+    <span>in</span>
+    
+      <a href="/categories/unpacking">unpacking</a>
+  </strong>
+  <span> • 3064 words</span>
+  <span> • 15 minute read</span>
+  
+    <div>
+      <span>Tags:</span>
+      
+        <a href="/tags/themida">themida</a>, 
+        <a href="/tags/unpacking">unpacking</a>, 
+        <a href="/tags/reverse-engineering">reverse engineering</a>
+    </div>
+  
+</div>
+
+  <div class="summary-body">
+    <p>The original post
+Gần đây, Nhóm Viettel Threat Intelligence có nhận được một mẫu malware có nguồn gốc Trung Quốc. Theo quan sát của chúng tôi thì nhóm tin tặc này đã tấn công vào các cơ quan tổ chức ở Việt Nam ít nhất là từ năm 2013.
+Mẫu thu được là một file được pack bằng Themida. Các file thực thi thường bị pack nhằm lẩn tránh các trình quét virus, hoặc nhằm cản trở việc phân tích của con người, việc unpack nhằm chống lại quá trình này.</p>
+    
+      <a href="https://levanvn.github.io/posts/unpack-themida-malware/">Read more...</a>
+    
+  </div>
+</article>
+
+		
+			<article>
+  <h1 class="summary-title"><a href="https://levanvn.github.io/posts/writing-a-simple-pe-packer-in-detail/">Writing a simple PE Packer in detail</a></h1>
+  <div class="post-meta">
+  <strong>
+    <span>Posted on</span>
+    <time>2019-03-09</time>
+    <span>in</span>
+    
+      <a href="/categories/packer">packer</a>
+  </strong>
+  <span> • 1498 words</span>
+  <span> • 8 minute read</span>
+  
+    <div>
+      <span>Tags:</span>
+      
+        <a href="/tags/packer">packer</a>
+    </div>
+  
+</div>
+
+  <div class="summary-body">
+    <p>Packers là một trong những kỹ thuật anti-RE rất phổ biến được sử dụng. Packer có nhiều lợi ích như làm rối mã nguồn tạo ra độ khó và kỹ năng cho người phân tích, giảm thiểu kích thước file thực thi lưu trữ trên bộ nhớ và có thể ẩn mình trước những phần mềm antivirus. Bài viết sẽ trình bày về nguyên lý mà các chương trình packer vẫn thường sử dụng và đi sâu vào những chi tiết kỹ thuật để hoàn thành được một chương trình Packer đầy đủ.</p>
+    
+      <a href="https://levanvn.github.io/posts/writing-a-simple-pe-packer-in-detail/">Read more...</a>
+    
+  </div>
+</article>
+
+		
+		<div>
+  
+  1 of 1
+  
+</div>
+
+	</main>
+
+    </div>
+    <footer>
+  <hr />
+  
+    <p id="social">
+      Find me around the web:
+      <br />
+      
+        
+        <a href="https://github.com/levanvn">GitHub</a>
+      
+         | 
+        <a href="https://twitter.com/vuonglvm">Twitter</a>
+      
+    </p>
+  
+  <p class="copyright">
+    Copyright © 2023
+    <a href="https://levanvn.github.io/"><strong>levanvn</strong></a>.
+    This work is licensed under the
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> license.
+  </p>
+  <p class="builtWith">
+    Built with
+    <a href="http://www.gohugo.io/">Hugo</a>,
+    using the theme
+    <a href="https://gitlab.com/ian-s-mcb/smigle-hugo-theme">smigle</a>,
+    which was influenced by the theme
+    <a href="https://github.com/sumnerevans/smol">smol</a>.
+  </p>
+</footer>
+
+  </body>
+</html>

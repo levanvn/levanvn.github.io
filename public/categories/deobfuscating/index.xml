@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>deobfuscating on Welcome to my blog</title>
+    <link>https://levanvn.github.io/categories/deobfuscating/</link>
+    <description>Recent content in deobfuscating on Welcome to my blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://levanvn.github.io/categories/deobfuscating/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FLARE-ON 10 - Challenge 13</title>
+      <link>https://levanvn.github.io/posts/flare-on10-challenge13/</link>
+      <pubDate>Sun, 03 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/flare-on10-challenge13/</guid>
+      <description>The original post
+This challenge is a bind shell that opens port 1337. If we use netcat to connect to this port and wireshark to capture packets, we see that it receives windows commands from the client side and returns results. These data are all in unencrypted cleartext form.
+This is an obfuscated file so opening it in IDA will not properly parse the functions of this bind shell. To know all the functions of the bind shell, we first need to write a script to convert the obfuscated file into a form that IDA can read.</description>
+    </item>
+    
+    <item>
+      <title>APT32 Deobfuscating Toolkit</title>
+      <link>https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/apt32-deobfuscating-toolkit/</guid>
+      <description>The original post
+APT32 (Ocean Lotus) là nhóm APT nổi tiếng với mục tiêu tấn công vào các tổ chức trong và ngoài nước ta. Đây là nhóm APT được ghi nhận là đã tấn công vào nhiều công ty, tổ chức tư nhân trải dài với nhiều lĩnh vực công nghiệp khác nhau. Chuỗi tấn công của nhóm APT32 có nhiều giai đoạn, với các lớp bảo vệ lẫn nhau, khiến cho mã độc của APT32 có nét đặc sắc riêng và gây nhiều khó khăn cho việc đọc hiểu code.</description>
+    </item>
+    
+  </channel>
+</rss>

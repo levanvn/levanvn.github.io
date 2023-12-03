@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>packer on Welcome to my blog</title>
+    <link>https://levanvn.github.io/categories/packer/</link>
+    <description>Recent content in packer on Welcome to my blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://levanvn.github.io/categories/packer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writing a simple PE Packer in detail</title>
+      <link>https://levanvn.github.io/posts/writing-a-simple-pe-packer-in-detail/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/writing-a-simple-pe-packer-in-detail/</guid>
+      <description>Packers là một trong những kỹ thuật anti-RE rất phổ biến được sử dụng. Packer có nhiều lợi ích như làm rối mã nguồn tạo ra độ khó và kỹ năng cho người phân tích, giảm thiểu kích thước file thực thi lưu trữ trên bộ nhớ và có thể ẩn mình trước những phần mềm antivirus. Bài viết sẽ trình bày về nguyên lý mà các chương trình packer vẫn thường sử dụng và đi sâu vào những chi tiết kỹ thuật để hoàn thành được một chương trình Packer đầy đủ.</description>
+    </item>
+    
+  </channel>
+</rss>

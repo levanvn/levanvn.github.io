@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>themida on Welcome to my blog</title>
+    <link>https://levanvn.github.io/tags/themida/</link>
+    <description>Recent content in themida on Welcome to my blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://levanvn.github.io/tags/themida/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unpack Themida Malware</title>
+      <link>https://levanvn.github.io/posts/unpack-themida-malware/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://levanvn.github.io/posts/unpack-themida-malware/</guid>
+      <description>The original post
+Gần đây, Nhóm Viettel Threat Intelligence có nhận được một mẫu malware có nguồn gốc Trung Quốc. Theo quan sát của chúng tôi thì nhóm tin tặc này đã tấn công vào các cơ quan tổ chức ở Việt Nam ít nhất là từ năm 2013.
+Mẫu thu được là một file được pack bằng Themida. Các file thực thi thường bị pack nhằm lẩn tránh các trình quét virus, hoặc nhằm cản trở việc phân tích của con người, việc unpack nhằm chống lại quá trình này.</description>
+    </item>
+    
+  </channel>
+</rss>
